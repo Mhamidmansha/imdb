@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2022_10_14_154312) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "actor_movies", force: :cascade do |t|
-    t.integer "actor_id"
-    t.integer "movie_id"
+    t.bigint "actor_id"
+    t.bigint "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["actor_id"], name: "index_actor_movies_on_actor_id"
@@ -22,8 +25,8 @@ ActiveRecord::Schema.define(version: 2022_10_14_154312) do
   end
 
   create_table "actors", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.string "email"
     t.integer "age"
     t.date "bdy"
@@ -32,13 +35,13 @@ ActiveRecord::Schema.define(version: 2022_10_14_154312) do
   end
 
   create_table "actors_movies", id: false, force: :cascade do |t|
-    t.integer "movie_id", null: false
-    t.integer "actor_id", null: false
+    t.bigint "movie_id", null: false
+    t.bigint "actor_id", null: false
   end
 
   create_table "director_movies", force: :cascade do |t|
-    t.integer "director_id"
-    t.integer "movie_id"
+    t.bigint "director_id"
+    t.bigint "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["director_id"], name: "index_director_movies_on_director_id"
@@ -74,4 +77,9 @@ ActiveRecord::Schema.define(version: 2022_10_14_154312) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "actor_movies", "actors"
+  add_foreign_key "actor_movies", "movies"
+  add_foreign_key "director_movies", "directors"
+  add_foreign_key "director_movies", "movies"
 end
