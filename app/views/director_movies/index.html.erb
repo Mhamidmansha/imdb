@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Director Movies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Director</th>
+      <th>Movie</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @director_movies.each do |director_movie| %>
+      <tr>
+        <td><%= director_movie.director_id %></td>
+        <td><%= director_movie.movie_id %></td>
+        <td><%= link_to 'Show', director_movie %></td>
+        <td><%= link_to 'Edit', edit_director_movie_path(director_movie) %></td>
+        <td><%= link_to 'Destroy', director_movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Director Movie', new_director_movie_path %>

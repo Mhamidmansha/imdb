@@ -1,0 +1,45 @@
+<%= form_with(model: actor, local: true) do |form| %>
+  <% if actor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(actor.errors.count, "error") %> prohibited this actor from being saved:</h2>
+
+      <ul>
+      <% actor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :age %>
+    <%= form.number_field :age %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bdy %>
+    <%= form.date_field :bdy, max:'2010-December-31' %>
+  </div>
+   <%= form.collection_select :movie_ids, Movie.all,
+                        :id, :title, { include_blank: true },
+                         { multiple: true } %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

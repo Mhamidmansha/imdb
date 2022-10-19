@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @actor.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @actor.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @actor.email %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @actor.age %>
+</p>
+
+<p>
+  <strong>Bdy:</strong>
+  <%= @actor.bdy %>
+</p>
+
+<strong>Movies:</strong>
+<% @actor.movies.each do |movie| %>
+  <p><%= link_to movie.title, movie_path(movie.id) %></p>
+
+<% end %>
+
+<%= link_to 'Edit', edit_actor_path(@actor) %> |
+<%= link_to 'Back', actors_path %>

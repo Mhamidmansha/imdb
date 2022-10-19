@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Actors</h1>
+
+<%= search_form_for @q do |f| %>
+    <%= f.label :first_name_cont %>
+    <%= f.search_field :first_name_cont %>
+ <%= f.submit %>
+ <% end %>
+  <% if @actors.present? %>
+
+<table>
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Age</th>
+      <th>Bdy</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @actors.each do |actor| %>
+      <tr>
+        <td><%= actor.first_name %></td>
+        <td><%= actor.last_name %></td>
+        <td><%= actor.email %></td>
+        <td><%= actor.age %></td>
+        <td><%= actor.bdy %></td>
+        <td><%= link_to 'Show', actor %></td>
+        <td><%= link_to 'Edit', edit_actor_path(actor) %></td>
+        <td><%= link_to 'Destroy', actor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+      </tr>
+    <% end %>
+    <% else %>
+    <tr>
+      <p> No Actors found! </p>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'Back', welcome_index_path %> <br><br>
+
+<%= link_to 'New Actor', new_actor_path %><br><br>
+<%= paginate @actors %>

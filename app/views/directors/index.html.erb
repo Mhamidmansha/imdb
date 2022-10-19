@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Directors</h1>
+
+<%= search_form_for @q do |f| %>
+    <%= f.label :first_name_cont %>
+    <%= f.search_field :first_name_cont %>
+ <%= f.submit %>
+ <% end %>
+<% if @directors.present? %>
+
+<table>
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Age</th>
+      <th>Bdy</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @directors.each do |director| %>
+      <tr>
+        <td><%= director.first_name %></td>
+        <td><%= director.last_name %></td>
+        <td><%= director.email %></td>
+        <td><%= director.age %></td>
+        <td><%= director.bdy %></td>
+        <td><%= link_to 'Show', director %></td>
+        <td><%= link_to 'Edit', edit_director_path(director) %></td>
+        <td><%= link_to 'Destroy', director, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    <% else %>
+    <tr>
+      <p> No Directors found! </p>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'Back', welcome_index_path %> <br> <br>
+
+<%= link_to 'New Director', new_director_path %><br><br>
+<%= paginate @directors %>
